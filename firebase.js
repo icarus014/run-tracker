@@ -1,17 +1,13 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import { initializeApp, getApps } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+// Import additional Firebase SDKs as needed
+// import { getAnalytics } from "firebase/analytics";
 
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
-};
+// Firebase configuration
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
 
-export const db = firebase.firestore();
+// Initialize Firebase only if it hasn’t been initialized already
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+
+// Initialize Firestore and export it
+export const db = getFirestore(app);
